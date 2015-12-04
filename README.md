@@ -30,7 +30,7 @@ source activate alexeys_conda
 ```
 please feel free to change the anaconda environment name.
 
-### Install git
+### Install git and iPython
 If you do not have it installed already, install git following the instructions on that page: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 and proceed to checkout the repository for the course.
 In addition, you are going to need to install the iPython: http://ipython.org/install.html
