@@ -76,7 +76,7 @@ sbatch hello_spark_slurm.cmd
 
 Check that your job got submitted:
 ```bash
-squeue <your_username>
+squeue -u <your_username>
 ```
 
 Look for the Slurm output file in the submission folder:
