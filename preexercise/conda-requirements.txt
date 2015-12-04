@@ -3,4 +3,3 @@ numpy
 pandas
 nltk
 beautifulsoup4
-urllib2_kerberos
