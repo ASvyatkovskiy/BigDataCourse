@@ -62,25 +62,28 @@ If you have the account, do the following few steps:
 ssh -XC your_username@adroit3.princeton.edu
 ```
 
-#### Load necessary modules: Python 2.7 and Spark:
-
-```bash
-module load python
-module load spark/hadoop2.6/1.4.1
-```
-
-#### Check Spark shell is ready:
-
-```bash
-spark-shell
-```
-
 #### Check-out the course github repository:
 
 ```bash
 git clone https://github.com/ASvyatkovskiy/BigDataCourse 
+cd BigDataCourse/preexercise
 ```
-(do not have to repeat the pre-exercises on Adroit second time)
+
+Submit a test Spark-slurm job (which only starts the Spark cluster and does nothing else):
+```bash
+sbatch hello_spark_slurm.cmd
+```
+
+Check that your job got submitted:
+```bash
+squeue <your_username>
+```
+
+Look for the Slurm output file in the submission folder:
+```bash
+ls -l slurm-*.out
+```
+and inspect it with your favourite text editor. The last line in the log file will give you the name of the Spark master node.
 
 
 ### In case help needed
