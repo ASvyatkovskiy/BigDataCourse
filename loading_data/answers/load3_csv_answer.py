@@ -27,11 +27,9 @@ def main(args):
     #Prepare a linked dataset of people, movies and the roles for people who played in those movies
     df = person_df.join(relationships_df, person_df.id == relationships_df.person_id) 
     combined_df = df.join(movie_df,movie_df.id == df.movie_id)
-    #print combined_df.take(5)
 
     #Use where statement analogous to that in Pandas dataframes to find movies associated with name "Tom Hanks"
     answer = combined_df.where(combined_df.name == "Tom Hanks")
-    #input_df.select('born', 'name').write.format('com.databricks.spark.csv').save('/user/alexeys/BigDataCourse/csv/newcars.csv')
 
     #Return only actor name, movie title and roles
     print answer.select('name','title','roles').show()
