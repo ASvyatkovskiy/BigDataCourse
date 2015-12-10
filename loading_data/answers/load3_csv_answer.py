@@ -3,10 +3,7 @@ from pyspark.sql import SQLContext
 
 import sys
 import time
-
-#run:
-# spark-submit --master local[*] --packages com.databricks:spark-csv_2.10:1.3.0 load3_csv_answer.py
-
+import os
 
 #Exercise: use what you have learned in the load2_csv.py exercise to load a set of CSV datasets 
 #and find movies where Tom Hanks played in
@@ -17,12 +14,10 @@ def main(args):
     delimiter = "|"
 
     #Load 3 csv files into spark dataframe   
-    #this requires using the databricks/spark-csv
-    #spark-submit argument --packages com.databricks:spark-csv_2.10:1.3.0
     sqlContext = SQLContext(sc)
-    person_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/user/alexeys/BigDataCourse/csv/person_nodes.csv')
-    movie_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/user/alexeys/BigDataCourse/csv/movie_nodes.csv')
-    relationships_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/user/alexeys/BigDataCourse/csv/acted_in_rels.csv')
+    person_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/person_nodes.csv')
+    movie_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/movie_nodes.csv')
+    relationships_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/acted_in_rels.csv')
 
     #Prepare a linked dataset of people, movies and the roles for people who played in those movies
     df = person_df.join(relationships_df, person_df.id == relationships_df.person_id) 
@@ -35,7 +30,7 @@ def main(args):
     print answer.select('name','title','roles').show()
 
     #Save the answer in JSON format 
-    answer.select('name','title','roles').write.save("/user/alexeys/BigDataCourse/json/", format="json")
+    answer.repartition(1).select('name','title','roles').write.save(os.environ.get('SCRATCH_PATH')+"/BigDataCourse/json/", format="json")
 
     end = time.time()
     print "Elapsed time: ", (end-start)
