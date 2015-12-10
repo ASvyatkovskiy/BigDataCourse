@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from pyspark import SparkContext
-from pyspark.storagelevel import StorageLevel
+#Uncomment the following import line for the exercise main_spark
+#from pyspark import SparkContext
 
 import sys
 import os
@@ -20,7 +20,7 @@ def basic_pythonic(numbers):
 def main_local(args):
     numbers = [1,2,3,4,5]
 
-    #Exercise4: from Python to PySpark
+    #Exercise: from Python to PySpark
     basic(numbers)
 
     #Before re-writing it in PySpark, re-write it using map and filter expressions
@@ -41,5 +41,6 @@ if __name__=='__main__':
     main_local(sys.argv)
 
     #Do not run this example from the command line: use slurm_for_ex2.cmd
+    #Need to uncomment the pyspark import line at the top
     #And submit as sbatch slurm_for_ex2.cmd
     #main_spark(sys.argv)
