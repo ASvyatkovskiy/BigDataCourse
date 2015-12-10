@@ -59,5 +59,6 @@ def main(args):
     #python_filter_squares_lambda()
 
 if __name__=='__main__':
+    #To run this example simply type python exercise1.py
     main(sys.argv)
 

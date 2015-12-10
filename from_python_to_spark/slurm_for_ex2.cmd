@@ -5,8 +5,9 @@
 #SBATCH --ntasks-per-node 2
 #SBATCH --cpus-per-task 3
 
+module load python
 module load spark/hadoop2.6/1.4.1 
 spark-start
 echo $MASTER
 
-spark-submit --total-executor-cores 2 exercise2.py
+spark-submit --total-executor-cores 2 exercise2.py 

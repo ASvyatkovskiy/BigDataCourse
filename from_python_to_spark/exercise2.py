@@ -4,32 +4,42 @@ from pyspark import SparkContext
 from pyspark.storagelevel import StorageLevel
 
 import sys
+import os
 
-def basic():
-    numbers = [1,2,3,4,5]
+def basic(numbers):
     squares = []
     for number in numbers:
         if number < 4:
             squares.append(number*number)
     print "Result of the local calculation: ", squares
 
-def basic_pythonic():
-    numbers = [1,2,3,4,5]
+def basic_pythonic(numbers):
     squares = map(lambda x: x*x, filter(lambda x: x < 4, numbers))
     print "Result of the local pythonic calculation: ", squares
 
-def main(args):
+def main_local(args):
+    numbers = [1,2,3,4,5]
+
     #Exercise4: from Python to PySpark
-    basic()
+    basic(numbers)
 
     #Before re-writing it in PySpark, re-write it using map and filter expressions
-    basic_pythonic()
+    basic_pythonic(numbers)
+
+def main_spark(args):
+    numbers = [1,2,3,4,5]
 
     #Now do with PySpark
-    sc = SparkContext("My First App")
+    sc = SparkContext(appName="MyFirstApp")
     numbers_rdd = sc.parallelize(numbers)
     squares_rdd = numbers_rdd.filter(lambda x: x < 4).map(lambda x: x*x)
-    print "Result of the distributed calculation with PySpark: ", squares_rdd.collect()
+    squares_rdd.repartition(1).saveAsTextFile("file://"+os.environ.get('SCRATCH_PATH')+"/output_exercise2/")
+    sc.stop()
 
-if __name__='__main__':
-    main(sys.argv)
+if __name__=='__main__':
+    #Run this locally first as python exercise2.py
+    main_local(sys.argv)
+
+    #Do not run this example from the command line: use slurm_for_ex2.cmd
+    #And submit as sbatch slurm_for_ex2.cmd
+    #main_spark(sys.argv)
