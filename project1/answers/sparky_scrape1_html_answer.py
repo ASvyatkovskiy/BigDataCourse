@@ -22,9 +22,9 @@ def parse_page(input_page_as_tuple):
     doc = {
             "id":urlid,
             "text":parse_text(soup),
-            #"title":parse_title(soup ),
-            #"links":parse_links(soup),
-            #"images":parse_images(soup),
+            "title":parse_title(soup ),
+            "links":parse_links(soup),
+            "images":parse_images(soup),
            }
 
     return doc
@@ -112,7 +112,7 @@ def main(argv,npartitions):
 if __name__ == "__main__":
    import time
    start = time.time()
-   npartitions = 1
+   npartitions = 15
    main(sys.argv,npartitions)
    end = time.time()
    print "Elapsed time: ", end-start 

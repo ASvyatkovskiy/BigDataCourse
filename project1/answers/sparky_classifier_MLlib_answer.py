@@ -11,9 +11,9 @@ from pyspark.mllib.regression import LabeledPoint
 from pyspark.mllib.feature import HashingTF
 from pyspark.mllib.feature import IDF
 
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import SnowballStemmer
+#from nltk.tokenize import word_tokenize
+#from nltk.corpus import stopwords
+#from nltk.stem import SnowballStemmer
 
 import re
 import sys
@@ -21,21 +21,21 @@ import numpy as np
 import time
 
 #Paths to train data and labels
-PATH_TO_JSON = "/user/alexeys/BigDataCourse/web_dataset_preprocessed/part-00000"
-PATH_TO_TRAIN_LABELS = "/user/alexeys/BigDataCourse/web_dataset_labels/train.json"
+PATH_TO_JSON = "/scratch/network/alexeys/BigDataCourse/web_dataset_preprocessed/part-*"
+PATH_TO_TRAIN_LABELS = "/scratch/network/alexeys/BigDataCourse/web_dataset_labels/train.json"
 
 # Module-level global variables for the `tokenize` function below
-STOPWORDS = stopwords.words('english')
-STEMMER = SnowballStemmer("english", ignore_stopwords=True)
+#STOPWORDS = stopwords.words('english')
+#STEMMER = SnowballStemmer("english", ignore_stopwords=True)
 
 # Function to break text into "tokens"
-def tokenize(text):
-    tokens = word_tokenize(text)
-    no_stopwords = filter(lambda x: x not in STOPWORDS,tokens)
-    stemmed = map(lambda w: STEMMER.stem(w),no_stopwords)
-    s = set(stemmed)
-    stemmed = list(s)
-    return filter(None,stemmed)
+#def tokenize(text):
+#    tokens = word_tokenize(text)
+#    no_stopwords = filter(lambda x: x not in STOPWORDS,tokens)
+#    stemmed = map(lambda w: STEMMER.stem(w),no_stopwords)
+#    s = set(stemmed)
+#    stemmed = list(s)
+#    return filter(None,stemmed)
 
 # Load and parse the data in the format good for classification
 def parsePoint(label,feature):
@@ -67,17 +67,11 @@ def main(argv):
 
     #Extract word frequencies in the corpus
     #numFeatures is a free parameter
-    tf = HashingTF(numFeatures=10000)
-    tokenized_0 = text_only_0.map(lambda line: tokenize(line))
-    count_vectorized_0 = tf.transform(tokenized_0).cache()
-    tokenized_1 = text_only_1.map(lambda line: tokenize(line))
-    count_vectorized_1 = tf.transform(tokenized_1).cache()
-
-    #calculating IDF 
-    idf_0 = IDF(minDocFreq=2).fit(count_vectorized_0)
-    tfidf_0 = idf_0.transform(count_vectorized_0)
-    idf_1 = IDF(minDocFreq=2).fit(count_vectorized_1)
-    tfidf_1 = idf_1.transform(count_vectorized_1)
+    tf = HashingTF(numFeatures=100)
+    tokenized_0 = text_only_0.map(lambda line: line.split()) #tokenize(line))
+    tfidf_0 = tf.transform(tokenized_0).cache()
+    tokenized_1 = text_only_1.map(lambda line: line.split()) #tokenize(line))
+    tfidf_1 = tf.transform(tokenized_1).cache()
 
     #convert into a format expected by MLlib classifiers
     labeled_tfidf_0 = tfidf_0.map(lambda row: parsePoint(0,row))
