@@ -6,15 +6,16 @@ from pyspark.storagelevel import StorageLevel
 
 #Import necessary classifiers
 from pyspark.mllib.classification import LogisticRegressionWithLBFGS, ...
-from pyspark.mllib.tree ...
+from pyspark.mllib.tree import ...
 
 from pyspark.mllib.regression import LabeledPoint
 from pyspark.mllib.feature import HashingTF
 from pyspark.mllib.feature import IDF
 
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import SnowballStemmer
+#Install NLTK with Anaconda (locally) and try alternative tokenizer
+#from nltk.tokenize import word_tokenize
+#from nltk.corpus import stopwords
+#from nltk.stem import SnowballStemmer
 
 import re
 import sys
@@ -22,22 +23,22 @@ import numpy as np
 import time
 
 #Paths to train data and labels
-PATH_TO_JSON = "/user/alexeys/BigDataCourse/web_dataset_preprocessed/part-00000"
-PATH_TO_TRAIN_LABELS = "/user/alexeys/BigDataCourse/web_dataset_labels/train.json"
+PATH_TO_JSON = "/scratch/network/alexeys/BigDataCourse/web_dataset_preprocessed/part-*"
+PATH_TO_TRAIN_LABELS = "/scratch/network/alexeys/BigDataCourse/web_dataset_labels/train.json"
 
+#Try alternative tokenizer, stemmer and stopword removal
 # Module-level global variables for the `tokenize` function below
-STOPWORDS = stopwords.words('english')
-STEMMER = SnowballStemmer("english", ignore_stopwords=True)
+#STOPWORDS = stopwords.words('english')
+#STEMMER = SnowballStemmer("english", ignore_stopwords=True)
 
 # Function to break text into "tokens"
-def tokenize(text):
-    tokens = word_tokenize(text)
-    no_stopwords = ...
-    stemmed = map(lambda w: STEMMER.stem(w),no_stopwords)
-    #remove duplicates
-    s = set(stemmed)
-    stemmed = list(s)
-    return filter(None,stemmed)
+#def tokenize(text):
+#    tokens = word_tokenize(text)
+#    no_stopwords = filter(lambda x: x not in STOPWORDS,tokens)
+#    stemmed = map(lambda w: STEMMER.stem(w),no_stopwords)
+#    s = set(stemmed)
+#    stemmed = list(s)
+#    return filter(None,stemmed)
 
 # Load and parse the data in the format good for classification
 def parsePoint(label,feature):
@@ -51,7 +52,7 @@ def main(argv):
     sc = SparkContext(appName="Classification")
     sqlContext = SQLContext(sc)
     input_schema_rdd = sqlContext.read.json(PATH_TO_JSON)
-    train_label_rdd = sqlContext....
+    train_label_rdd = sqlContext. ...
 
     # SQL can be run over DataFrames that have been registered as a table.
     input_schema_rdd.registerTempTable("input")
@@ -59,7 +60,7 @@ def main(argv):
     
     #Make RDD with labels
     train_wlabels_0 = sqlContext.sql("SELECT title,text,images,links,label FROM input JOIN train_label WHERE input.id = train_label.id AND label = 0")
-    train_wlabels_1 = sqlContext.sql("...")
+    train_wlabels_1 = sqlContext. ...
 
     #FEATURE ENGINEERING
     print "Feature extraction..."
@@ -69,22 +70,15 @@ def main(argv):
 
     #Extract word frequencies in the corpus
     #numFeatures is a free parameter
-    tf = HashingTF(numFeatures=10000)
-    tokenized_0 = text_only_0.map(lambda line: tokenize(line))
-    count_vectorized_0 = tf.transform(tokenized_0).cache()
-    tokenized_1 = text_only_1.map(lambda line: tokenize(line))
-    count_vectorized_1 = tf.transform(tokenized_1).cache()
-
-    #calculating IDF 
-    idf_0 = IDF(minDocFreq=2).fit(count_vectorized_0)
-    tfidf_0 = idf_0.transform(count_vectorized_0)
-    idf_1 = IDF(minDocFreq=2).fit(count_vectorized_1)
-    tfidf_1 = idf_1.transform(count_vectorized_1)
+    tf = HashingTF(numFeatures=100)
+    tokenized_0 = text_only_0.map(lambda line: line.split()) #tokenize(line))
+    tfidf_0 = tf.transform(tokenized_0).cache()
+    tokenized_1 = text_only_1.map(lambda line: line.split()) #tokenize(line))
+    tfidf_1 = tf.transform(tokenized_1).cache()
 
     #convert into a format expected by MLlib classifiers
-    #Which is a Labeled point
-    labeled_tfidf_0 = tfidf_0.map(...)
-    labeled_tfidf_1 = tfidf_1.map(...)
+    labeled_tfidf_0 = tfidf_0.map(lambda row: parsePoint(0,row))
+    labeled_tfidf_1 = ...
     labeled_tfidf = labeled_tfidf_0.union(labeled_tfidf_1)
 
     #CV, MODEL SELECTION, AND CLASSIFICATION STEP
@@ -97,11 +91,13 @@ def main(argv):
     #Logistic regression
     model = LogisticRegressionWithLBFGS.train(trainData,iterations=10,regParam=0.01,regType="l1",numClasses=2)
 
-    #Try training an SVM model instead
-    #model = 
+    #SVM
+    #model = SVMWithSGD.train(trainData,iterations=200,regParam=10) 
 
-    #Try training random forest classifier
-    #model = RandomForest. ...
+    #Random forest
+    #model = RandomForest.trainClassifier(trainData, numClasses=2, categoricalFeaturesInfo={},
+    #                                 numTrees=200, featureSubsetStrategy="auto",
+    #                                 impurity='gini', maxDepth=4, maxBins=32)
 
     #EVALUATION STEP
     # Evaluate model on test instances and compute test error
