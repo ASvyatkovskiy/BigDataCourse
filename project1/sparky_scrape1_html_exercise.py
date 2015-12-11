@@ -3,6 +3,9 @@ import os, sys, logging, string, glob
 import json
 import re
 
+#Import relevant Spark libraries
+from pyspark ...
+
 def clean_text(text_as_list):
     text_as_string = " ".join(text_as_list)
     text_as_string = text_as_string.encode("utf8").translate(None,'=@&$/%?<>,[]{}()*.0123456789:;-\n\'"_').lower()
@@ -10,20 +13,11 @@ def clean_text(text_as_list):
 
     return text_as_string
 
+
+#Modify the parse_page method. Are any modifications necessary
 def parse_page(input_page_as_tuple):
-    filename,page = input_page_as_tuple
 
-    filenameDetails = filename.split("/")
-    urlid = filenameDetails[-1].split('_')[0]
-
-    soup = bs(page)
-    doc = {
-            "id": urlid, 
-            "text":parse_text(soup),
-            #"title":parse_title(soup ),
-            #"links":parse_links(soup),
-            #"images":parse_images(soup),
-           }
+    ....
 
     return doc
 
@@ -50,6 +44,7 @@ def parse_text(soup):
 
     textdata = filter(None,textdata)
     return clean_text(textdata)
+
 
 def parse_title(soup):
     """ parameters:
@@ -100,29 +95,23 @@ def parse_images(soup):
 
     return filter(None,imagesdata)
 
-def main(argv):
-    inFolder = "/scratch/network/alexeys/BigDataCourse/web_dataset/2/"
-    outputDirectory = os.environ.get('PWD')
+def main(argv,npartitions):
+    #Initialize Spark context
+    sc = ...
 
-    json_array = []
-    fIn = glob.glob( inFolder+'/*txt')
-    print len(fIn)
+    #Read whole files in the following folder: /user/alexeys/BigDataCourse/web_dataset/ into a pair RDD of type
+    #document unique ID - document contents as string tuple
+    #Apply the parse_page method to parse each page (first map() transformation)
+    #Convert everything to JSON format (second map() transformation)
+    fIn_rdd = sc.wholeTextFiles("/scratch/network/alexeys/BigDataCourse/web_dataset/2/",npartitions).map() ... map()
 
-    for filename in fIn:
-        f = open(filename,"r").read().replace('\n', '')
-        doc = parse_page((filename,f))
-        json_array.append(doc)
+    #do not repartition - we are running with 1 partition for testing purposes
+    fIn_rdd.saveAsTextFile(os.environ.get('SCRATCH_PATH')+'/BigDataCourse/web_dataset_preprocessed2/')
 
-    out_file = open(outputDirectory+"/chunk.json","w")
-    for entry in json_array:
-        json.dump(entry, out_file)
-        out_file.write('\n')
-    out_file.close()
-
-           
-import time
 if __name__ == "__main__":
+   import time
    start = time.time()
-   main(sys.argv)
+   npartitions = 1
+   main(sys.argv,npartitions)
    end = time.time()
-   print "Elapsed time: ", end-start 
+   print "Elapsed time: ", end-start

@@ -3,6 +3,8 @@ import os, sys, logging, string, glob
 import json
 import re
 
+from pyspark import SparkContext
+
 def clean_text(text_as_list):
     text_as_string = " ".join(text_as_list)
     text_as_string = text_as_string.encode("utf8").translate(None,'=@&$/%?<>,[]{}()*.0123456789:;-\n\'"_').lower()
@@ -12,13 +14,13 @@ def clean_text(text_as_list):
 
 def parse_page(input_page_as_tuple):
     filename,page = input_page_as_tuple
+    soup = bs(page)
 
     filenameDetails = filename.split("/")
     urlid = filenameDetails[-1].split('_')[0]
 
-    soup = bs(page)
     doc = {
-            "id": urlid, 
+            "id":urlid,
             "text":parse_text(soup),
             #"title":parse_title(soup ),
             #"links":parse_links(soup),
@@ -50,6 +52,7 @@ def parse_text(soup):
 
     textdata = filter(None,textdata)
     return clean_text(textdata)
+
 
 def parse_title(soup):
     """ parameters:
@@ -100,29 +103,16 @@ def parse_images(soup):
 
     return filter(None,imagesdata)
 
-def main(argv):
-    inFolder = "/scratch/network/alexeys/BigDataCourse/web_dataset/2/"
-    outputDirectory = os.environ.get('PWD')
 
-    json_array = []
-    fIn = glob.glob( inFolder+'/*txt')
-    print len(fIn)
+def main(argv,npartitions):
+    sc = SparkContext(appName="WebScraper")
+    fIn_rdd = sc.wholeTextFiles("/scratch/network/alexeys/BigDataCourse/web_dataset/2/",npartitions).map(parse_page).map(lambda x: json.dumps(x))
+    fIn_rdd.saveAsTextFile(os.environ.get('SCRATCH_PATH')+'/BigDataCourse/web_dataset_preprocessed2/')
 
-    for filename in fIn:
-        f = open(filename,"r").read().replace('\n', '')
-        doc = parse_page((filename,f))
-        json_array.append(doc)
-
-    out_file = open(outputDirectory+"/chunk.json","w")
-    for entry in json_array:
-        json.dump(entry, out_file)
-        out_file.write('\n')
-    out_file.close()
-
-           
-import time
 if __name__ == "__main__":
+   import time
    start = time.time()
-   main(sys.argv)
+   npartitions = 1
+   main(sys.argv,npartitions)
    end = time.time()
    print "Elapsed time: ", end-start 

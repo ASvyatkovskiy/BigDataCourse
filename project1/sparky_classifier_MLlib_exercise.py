@@ -32,8 +32,9 @@ STEMMER = SnowballStemmer("english", ignore_stopwords=True)
 # Function to break text into "tokens"
 def tokenize(text):
     tokens = word_tokenize(text)
-    no_stopwords = filter(lambda x: x not in STOPWORDS,tokens)
+    no_stopwords = ...
     stemmed = map(lambda w: STEMMER.stem(w),no_stopwords)
+    #remove duplicates
     s = set(stemmed)
     stemmed = list(s)
     return filter(None,stemmed)
@@ -50,7 +51,7 @@ def main(argv):
     sc = SparkContext(appName="Classification")
     sqlContext = SQLContext(sc)
     input_schema_rdd = sqlContext.read.json(PATH_TO_JSON)
-    train_label_rdd = sqlContext.read.json(PATH_TO_TRAIN_LABELS)
+    train_label_rdd = sqlContext....
 
     # SQL can be run over DataFrames that have been registered as a table.
     input_schema_rdd.registerTempTable("input")
@@ -58,7 +59,7 @@ def main(argv):
     
     #Make RDD with labels
     train_wlabels_0 = sqlContext.sql("SELECT title,text,images,links,label FROM input JOIN train_label WHERE input.id = train_label.id AND label = 0")
-    train_wlabels_1 = sqlContext.sql("SELECT title,text,images,links,label FROM input JOIN train_label WHERE input.id = train_label.id AND label = 1")
+    train_wlabels_1 = sqlContext.sql("...")
 
     #FEATURE ENGINEERING
     print "Feature extraction..."
