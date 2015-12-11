@@ -7,7 +7,7 @@ object KMeans {
     def main(args: Array[String]) = {
         val sc = new SparkContext()
         def toLatLon(line: String) = {
-            val latlon = line.split(",").slice(5,7)
+            val latlon = ...
             Vectors.dense(latlon.map(v => v.toDouble))
         }
         val numIterations = 20
@@ -21,11 +21,11 @@ object KMeans {
 
                 // Remove first line
                 val data = d.filter(line => ! line.contains("vendor_id"))
-                val latlon = data.map(toLatLon).filter(v => v.size == 2).filter(v => v(0) != 0.0).cache()
+                val latlon = data.map(...).filter(v => v.size == 2).filter(v => v(0) != 0.0).cache()
 
                 // Use Kmeans
                 var start_time = System.currentTimeMillis()
-                var clusters = KMeans.train(latlon, numCluster, numIterations)
+                var clusters = KMeans.train(...)
                 var end_time = System.currentTimeMillis()
                 var WSSSE = clusters.computeCost(latlon)
                 println("Within Set Sum of Squared Errors = " + WSSSE)
