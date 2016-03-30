@@ -23,13 +23,13 @@ Install ssh client on your laptop if necessary (for instance, Putty).
 
 ### How to run Spark on a Princeton University cluster: reading
 
-To get a feeling of how this works, please looks through the following FAQ page:
+To get a feeling of how this works, please look through the following FAQ page:
 https://www.princeton.edu/researchcomputing/faq/spark-via-slurm/
 
 
 ### Install iPython notebook on your laptop
 
-Install iPython notebook and it's basic dependencies on your laptop.
+Install iPython notebook and its basic dependencies on your laptop.
 To do so, you would have to follow the instructions here:
 https://ipython.org/ipython-doc/2/install/install.html
 
@@ -46,6 +46,12 @@ cd spark/
 build/mvn -DskipTests clean package
 ```
 
+You are going to need to install Maven build tool for that. 
+You can download Maven from the web: https://maven.apache.org/download.cgi and add to `PATH`:
+```bash
+export PATH=<path to your maven>/apache-maven-3.3.9/bin:$PATH
+```
+
 2) Update following environmental variables to point to the new Spark location:
 
 ```bash
@@ -54,7 +60,7 @@ export PATH=$SPARK_HOME/sbin:$SPARK_HOME/bin:$PATH
 export HADOOP_CONF_DIR=/etc/hadoop/conf
 ```
 
-these 3 lines should be added to the *.bashrc* file, otherwise you would have to export these values each time you log in.
+these 3 lines should be added to the *.bashrc* file on your laptop, otherwise you would have to export these values each time you log in!
 
 ## Pre-exercises (not required, but might be interesting)
 
