@@ -2,7 +2,8 @@
 
 ## Getting ready for the workshop (required before the day of workshop)
 
-This subsection describes what you need to get the most of the workshop.
+You will need to request access to the Adroit cluster, install Apache Spark and some packages on your laptop, and optionally complete a set of pre-exercises.
+
 All the pre-exercises are supposed to be completed on your laptops. Some of the workshop exercises will be done on your laptops, and some will be done on the cluster.
 
 ### Request an Adroit computing account
