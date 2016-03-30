@@ -1,6 +1,6 @@
 #Introduction to Big Data with Apache Spark
 
-## Getting ready for the workshop
+## Getting ready for the workshop (required before the day of workshop)
 
 This subsection describes what you need to get the most of the workshop.
 All the pre-exercises are supposed to be completed on your laptops. Some of the workshop exercises will be done on your laptops, and some will be done on the cluster.
@@ -10,7 +10,7 @@ All the pre-exercises are supposed to be completed on your laptops. Some of the 
 Please make sure you have and Adroit computing account or request it following the instructions on the page:
 https://www.princeton.edu/researchcomputing/computational-hardware/adroit/
 
-### Connecting to the cluster
+### Test connection to the cluster
 
 If you have the account, login to Adroit with X11 forwarding enabled:
 
@@ -20,12 +20,11 @@ ssh -XC your_username@adroit3.princeton.edu
 
 Install ssh client on your laptop if necessary (for instance, Putty).
 
-### Running Spark on a cluster: reading about Princeton University setup
+### How to run Spark on a Princeton University cluster: reading
 
 To get a feeling of how this works, please looks through the following FAQ page:
 https://www.princeton.edu/researchcomputing/faq/spark-via-slurm/
 
-(no hands-on action necessary before the workshop, just reading)
 
 ### Install iPython notebook on your laptop
 
