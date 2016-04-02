@@ -27,13 +27,6 @@ To get a feeling of how this works, please look through the following FAQ page:
 https://www.princeton.edu/researchcomputing/faq/spark-via-slurm/
 
 
-### Install iPython notebook on your laptop
-
-Install iPython notebook and its basic dependencies on your laptop.
-To do so, you would have to follow the instructions here:
-https://ipython.org/ipython-doc/2/install/install.html
-
-
 ### Install Apache Spark on your laptop
 
 Install Apache Spark 1.6.1 or later on your laptop. Here are some instructions on how to do that:
