@@ -19,9 +19,16 @@ Next, activate your Anaconda environment where the iPython noteboom is installed
 source activate my_conda
 ```
 
+Test that the necessary Spark environmental variables are set
+```bash
+echo $SPARK_HOME
+```
+(that should return a valid path in your filesystem, as opposed to an empty string)
+
 Start interactive ipython notebook:
 ```bash
-ipython notebook
+#ipython notebook
+IPYTHON_OPTS="notebook" $SPARK_HOME/bin/pyspark
 ```
 change to the directory for first task 1_TransformationsActions in the web browser GUI, and click on the interactive python file.
 
