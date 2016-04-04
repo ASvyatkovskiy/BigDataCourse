@@ -6,9 +6,8 @@
 #SBATCH --cpus-per-task 3
 #SBATCH --reservation root_21
 
-module load python
 module load spark/hadoop2.6/1.6.1
 spark-start
 echo $MASTER
 
-spark-submit --total-executor-cores 18 logistic3_mllib_exercise.py
+spark-submit --total-executor-cores 18 ml_pipeline.py
