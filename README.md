@@ -2,7 +2,7 @@
 
 Go to the root of work area where you checked out the course pre-exercises, and type:
 ```bash
-git checkout branch Spring2016
+git checkout Spring2016
 ```
 
 If you have not follow the pre-exercises, then check-out the git repository with the exercise 
@@ -31,4 +31,3 @@ Start interactive ipython notebook:
 IPYTHON_OPTS="notebook" $SPARK_HOME/bin/pyspark
 ```
 change to the directory for first task 1_TransformationsActions in the web browser GUI, and click on the interactive python file.
-
