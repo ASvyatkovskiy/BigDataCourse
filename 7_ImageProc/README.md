@@ -1,19 +1,15 @@
-# Image processing with Thunder (on the Adroit cluster)
+# Image processing with Thunder (on the laptop)
 
-We are going to explore a single-node setup for this exercise. 
-To run on a single node on Adroit you would have to first install thunder:
+To get started, change into the exercise directory, make sure you are in the Anaconda environment (in case you restarted your laptop or opened a different terminal window):
 
 ```bash
 cd BigDataCourse/7_ImageProc
-module load python
-pip install --user thunder
+source activate <your_conda_env>
+pip install --user thunder-python
 ```
 
-Once thunder is installed you can use it in jobs after adding to your
-Slurm scripts:
+Re-start the notebook:
 
 ```bash
-module load python
-module load spark/hadoop2.6/1.6.1
-export PATH=~/.local/bin:$PATH
+IPYTHON_OPTS="notebook" $SPARK_HOME/bin/pyspark
 ```
