@@ -1,6 +1,6 @@
 #Setting up /scratch/network folder
 
-Before starting with the exercise2.py, you need to make sure the scratch is set up.
+Before starting with the exercise.py, you need to make sure the scratch is set up.
 Look for your scratch folder:
 
 ```bash
