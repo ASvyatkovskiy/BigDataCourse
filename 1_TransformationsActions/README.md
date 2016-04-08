@@ -18,7 +18,7 @@ Define an environmental variable to store its location:
 export SCRATCH_PATH="/scratch/network/<your_username>"
 ``` 
 
-Then add this line to your .profile file, in case you log out before finishing working on the exrcises.
+Then add this line to your .bashrc file on Adroit, in case you log out before finishing working on the exrcises.
 
 # Setting up an environmental variable pointing to the root of the course directory
 
@@ -29,4 +29,4 @@ cd BigDataCourse
 export WORKDIR_ROOT=$PWD
 ```
 
-Make sure to add this export to the .profile as well.
+Make sure to add this export to the .bashrc file on Adroit as well.
