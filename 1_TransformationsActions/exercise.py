@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #Uncomment the following import line for the exercise main_spark
-#from pyspark import SparkContext
+from pyspark import SparkContext
 
 import sys
 import os
@@ -33,14 +33,14 @@ def main_spark(args):
     sc = SparkContext(appName="MyFirstApp")
     numbers_rdd = sc.parallelize(numbers)
     squares_rdd = numbers_rdd.filter(lambda x: x < 4).map(lambda x: x*x)
-    squares_rdd.repartition(1).saveAsTextFile("file://"+os.environ.get('SCRATCH_PATH')+"/output_exercise2/")
+    squares_rdd.repartition(1).saveAsTextFile("file://"+os.environ.get('SCRATCH_PATH')+"/output_exercise/")
     sc.stop()
 
 if __name__=='__main__':
-    #Run this locally first as python exercise2.py
+    #Run this locally first as python exercise.py
     main_local(sys.argv)
 
-    #Do not run this example from the command line: use slurm_for_ex2.cmd
+    #Do not run this example from the command line: use slurm.cmd
     #Need to uncomment the pyspark import line at the top
-    #And submit as sbatch slurm_for_ex2.cmd
+    #And submit as sbatch slurm.cmd
     #main_spark(sys.argv)
