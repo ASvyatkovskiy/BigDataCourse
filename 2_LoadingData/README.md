@@ -1,11 +1,10 @@
 In this section, we will explore loading basic data types into RDDs and Dataframes.
 
-Let us copy some additional jars to be able to use a third-part spark-csv library from Databricks. From the root folder of the exercises do:
+On your laptops, where you will run all of the iPython notebook, go ahead and copy some additional jars to be able to use a third-part spark-csv library from Databricks (note, that you do not have to do it on the cluster - it is taken care of for you). From the root folder of the exercises do:
 
 ```bash
 cd BigDataCourse
-export WORKDIR_ROOT=$PWD
-cp $WORKDIR_ROOT/ExtraJars/* $SPARK_HOME/lib_managed/jars/
+cp ExtraJars/* $SPARK_HOME/lib_managed/jars/
 ```
 
 Now, restart your notebook like this:
