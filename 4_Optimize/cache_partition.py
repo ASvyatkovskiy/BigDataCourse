@@ -2,7 +2,6 @@ from pyspark import SparkContext
 
 import sys
 import time
-import re
 import os
 from operator import add
 
@@ -10,7 +9,7 @@ def main(args,npartitions):
     sc = SparkContext(appName="LoadJson")
 
     start = time.time()
-    lines = sc.textFile(os.environ.get('SCRATCH_PATH')+"/BigDataCourse/large/", npartitions)
+    lines = sc.textFile("/scratch/network/alexeys/BigDataCourse/large/", npartitions)
     print "Number of elements in input dataframe: ", lines.count()
 
     counts = lines.flatMap(lambda x: x.split(' ')) \
@@ -19,13 +18,13 @@ def main(args,npartitions):
     #Uncomment for exercise 2
     #counts.cache()
 
-    counts.saveAsTextFile(os.environ.get('SCRATCH_PATH')+"/BigDataCourse/output_large1/")
+    counts.saveAsTextFile(os.environ.get('SCRATCH_PATH')+"/output_large1/")
 
     #Uncomment for exercise 2
     #counts2 = lines.flatMap(lambda x: x.split(' ')) \
     #              .map(lambda x: (x, 1)) \
     #              .reduceByKey(add)
-    #counts2.saveAsTextFile(os.environ.get('SCRATCH_PATH')+"/BigDataCourse/output_large2/")
+    #counts2.saveAsTextFile(os.environ.get('SCRATCH_PATH')+"/output_large2/")
 
     end = time.time()
     print "Elapsed time: ", end-start
