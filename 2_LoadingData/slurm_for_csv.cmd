@@ -4,8 +4,9 @@
 #SBATCH -t 00:05:00
 #SBATCH --ntasks-per-node 2
 #SBATCH --cpus-per-task 3
-#SBATCH --reservation root_21
+#SBATCH --reservation bigdata_introduction
 
+module load python
 module load spark/hadoop2.6/1.6.1
 spark-start
 echo $MASTER

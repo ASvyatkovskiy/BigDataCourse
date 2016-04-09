@@ -6,6 +6,7 @@
 #SBATCH --cpus-per-task 3
 #SBATCH --reservation root_21
 
+module load python
 module load spark/hadoop2.6/1.6.1
 spark-start
 echo $MASTER

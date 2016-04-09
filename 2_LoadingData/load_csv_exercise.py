@@ -5,7 +5,7 @@ import sys
 import time
 import os
 
-#Exercise: use what you have learned in the load2_csv.py exercise to load a set of CSV datasets 
+#Exercise: use what you have learned in the LoadingData.ipynb notebook to load a set of CSV datasets 
 #and find movies where Tom Hanks played in
 
 def main(args):
@@ -32,7 +32,7 @@ def main(args):
     print answer.select(...).show()
 
     #Save the answer in JSON format 
-    answer.repartition(1).select(...).write.save(os.environ.get('SCRATCH_PATH')+"/BigDataCourse/json/", format="json")
+    answer.repartition(1).select(...).write.save(os.environ.get('SCRATCH_PATH')+"/json/", format="json")
 
     end = time.time()
     print "Elapsed time: ", (end-start)
