@@ -1,0 +1,33 @@
+#Introduction to Big Data with Apache Spark
+
+Go to the root of work area where you checked out the course pre-exercises, and type:
+```bash
+git checkout Spring2016
+```
+
+If you have not follow the pre-exercises, then check-out the git repository with the exercise 
+
+```bash
+git clone https://github.com/ASvyatkovskiy/BigDataCourse
+```
+and then switch to the Spring2016 branch.
+
+Next, activate your Anaconda environment where the iPython noteboom is installed:
+
+```bash
+#conda create --name my_conda --file conda-requirements.txt
+source activate my_conda
+```
+
+Test that the necessary Spark environmental variables are set
+```bash
+echo $SPARK_HOME
+```
+(that should return a valid path in your filesystem, as opposed to an empty string)
+
+Start interactive ipython notebook:
+```bash
+#ipython notebook
+IPYTHON_OPTS="notebook" $SPARK_HOME/bin/pyspark
+```
+change to the directory for first task 1_TransformationsActions in the web browser GUI, and click on the interactive python file.
