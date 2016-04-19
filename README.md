@@ -129,3 +129,26 @@ and inspect it with your favourite text editor. The last line in the log file wi
 
 ### In case help needed
 If you are experiencing any problems with the installation part or pre-exercises: please email me at alexeys@princeton.edu or come see me at the regular CSES office hours on Tuesday.
+
+
+#Introduction to Big Data with Apache Spark: main exercise
+
+Activate your Anaconda environment where the iPython noteboom is installed:
+
+```bash
+#conda create --name my_conda --file conda-requirements.txt
+source activate my_conda
+```
+
+Test that the necessary Spark environmental variables are set
+```bash
+echo $SPARK_HOME
+```
+(that should return a valid path in your filesystem, as opposed to an empty string)
+
+Start interactive ipython notebook:
+```bash
+#ipython notebook
+IPYTHON_OPTS="notebook" $SPARK_HOME/bin/pyspark
+```
+change to the directory for first task 1_TransformationsActions in the web browser GUI, and click on the interactive python file.
