@@ -29,9 +29,11 @@ https://www.princeton.edu/researchcomputing/faq/spark-via-slurm/
 
 ### Install Apache Spark on your laptop
 
-Install Apache Spark 1.6.1 or later on your laptop. Here are some instructions on how to do that:
+Install Apache Spark 1.6.1 on your laptop. Here are some instructions on how to do that:
 1) Go to the Spark download page: http://spark.apache.org/downloads.html
-select a prebuilt distribution you need. Download and unpack it, then proceed to the step 2). Alternatively, install and build a custom Spark distribution from source:
+select a prebuilt distribution: http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz
+
+Download and unpack it, then proceed to the step 2). Alternatively, one can install and build a custom Spark distribution from source:
 
 ```bash
 git clone git://github.com/apache/spark.git
@@ -40,7 +42,7 @@ build/mvn -DskipTests clean package
 ```
 
 You are going to need to install Maven build tool for that. 
-You can download Maven from the web: https://maven.apache.org/download.cgi and add to `PATH`:
+Maven can be downloaded from the web: https://maven.apache.org/download.cgi unpack it, and add to the `PATH`:
 ```bash
 export PATH=<path to your maven>/apache-maven-3.3.9/bin:$PATH
 ```
@@ -50,10 +52,9 @@ export PATH=<path to your maven>/apache-maven-3.3.9/bin:$PATH
 ```bash
 export SPARK_HOME=/home/<your_username>/your_local_spark/spark
 export PATH=$SPARK_HOME/sbin:$SPARK_HOME/bin:$PATH
-export HADOOP_CONF_DIR=/etc/hadoop/conf
 ```
 
-these 3 lines should be added to the *.bashrc* file on your laptop, otherwise you would have to export these values each time you log in!
+these lines should be added to the *.bashrc* file on your laptop, otherwise you would have to export these values each time you log in!
 
 ## Pre-exercises (not required, but might be interesting)
 
