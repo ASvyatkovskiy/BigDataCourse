@@ -4,3 +4,4 @@ numpy
 pandas
 nltk
 beautifulsoup4
+matplotlib
