@@ -29,9 +29,11 @@ https://www.princeton.edu/researchcomputing/faq/spark-via-slurm/
 
 ### Install Apache Spark on your laptop
 
-Install Apache Spark 1.6.1 or later on your laptop. Here are some instructions on how to do that:
+Install Apache Spark 2.0.0 on your laptop. Here are some instructions on how to do that:
 1) Go to the Spark download page: http://spark.apache.org/downloads.html
-select a prebuilt distribution you need. Download and unpack it, then proceed to the step 2). Alternatively, install and build a custom Spark distribution from source:
+select a prebuilt distribution: http://d3kbcqa49mib13.cloudfront.net/spark-2.0.0-bin-hadoop2.6.tgz
+
+Download and unpack it, then proceed to the step 2). Alternatively, one can install and build a custom Spark distribution from source:
 
 ```bash
 git clone git://github.com/apache/spark.git
@@ -40,7 +42,7 @@ build/mvn -DskipTests clean package
 ```
 
 You are going to need to install Maven build tool for that. 
-You can download Maven from the web: https://maven.apache.org/download.cgi and add to `PATH`:
+Maven can be downloaded from the web: https://maven.apache.org/download.cgi unpack it, and add to the `PATH`:
 ```bash
 export PATH=<path to your maven>/apache-maven-3.3.9/bin:$PATH
 ```
@@ -50,10 +52,9 @@ export PATH=<path to your maven>/apache-maven-3.3.9/bin:$PATH
 ```bash
 export SPARK_HOME=/home/<your_username>/your_local_spark/spark
 export PATH=$SPARK_HOME/sbin:$SPARK_HOME/bin:$PATH
-export HADOOP_CONF_DIR=/etc/hadoop/conf
 ```
 
-these 3 lines should be added to the *.bashrc* file on your laptop, otherwise you would have to export these values each time you log in!
+these lines should be added to the *.bashrc* file on your laptop, otherwise you would have to export these values each time you log in!
 
 ## Pre-exercises (not required, but might be interesting)
 
@@ -70,7 +71,11 @@ All exercises are intended to be perfromed on your laptops.
 ### Download and install Anaconda
 
 Please go to the following website: https://www.continuum.io/downloads
-download and install Anaconda version for Python 2.7 for your operating system. After that, type:
+download and install *the latest* Anaconda version for Python 2.7 for your operating system. 
+
+Note: we are going to need Anaconda 4.1.x or later
+
+After that, type:
 
 ```bash
 conda --help
@@ -84,6 +89,29 @@ conda create --name my_conda --file conda-requirements.txt
 source activate my_conda
 ```
 
+### Installing Jupyter Scala launcher
+
+First, ensure you got the right version of jupyter by typing: 
+
+```bash
+jupyter --version
+``` 
+it should print a value >= 4.0. Next, download and run the Jupyter Scala launcher with:
+
+```bash
+curl -L -o jupyter-scala https://git.io/vrHhi && chmod +x jupyter-scala && ./jupyter-scala && rm -f jupyter-scala
+```
+
+This downloads the bootstrap launcher of Jupyter Scala, then runs it. 
+If no previous version of it is already installed, this simply sets up 
+the kernel in ~/Library/Jupyter/kernels/scala211 (OSX) or ~/.local/share/jupyter/kernels/scala211 (Linux). 
+Note that on first launch, it will download its dependencies from Maven repositories. 
+These can be found under ~/.jupyter-scala/bootstrap.
+
+Once installed, the downloaded launcher can be removed, as it copies itself 
+in ~/Library/Jupyter/kernels/scala211 or ~/.local/share/jupyter/kernels/scala211.
+
+
 ### Install git
 
 If you do not have it installed already, install git following the instructions on that page: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
@@ -96,9 +124,9 @@ git clone https://github.com/ASvyatkovskiy/BigDataCourse
 cd BigDataCourse/preexercise/
 ```
 
-Start interactive ipython notebook:
+Start interactive jupyter (ipython) notebook:
 ```bash
-ipython notebook
+jupyter notebook
 ```
 and proceed to complete each of the pre-exercises one by one.
 
