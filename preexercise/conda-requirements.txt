@@ -1,4 +1,4 @@
-ipython-notebook
+jupyter
 scikit-learn
 numpy
 pandas
