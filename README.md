@@ -71,7 +71,11 @@ All exercises are intended to be perfromed on your laptops.
 ### Download and install Anaconda
 
 Please go to the following website: https://www.continuum.io/downloads
-download and install Anaconda version for Python 2.7 for your operating system. After that, type:
+download and install *the latest* Anaconda version for Python 2.7 for your operating system. 
+
+Note: we are going to need Anaconda 4.1.x or later
+
+After that, type:
 
 ```bash
 conda --help
