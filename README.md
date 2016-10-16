@@ -25,9 +25,21 @@ echo $SPARK_HOME
 ```
 (that should return a valid path in your filesystem, as opposed to an empty string)
 
-Start interactive ipython notebook:
+Locate your anaconda python:
 ```bash
-#ipython notebook
-IPYTHON_OPTS="notebook" $SPARK_HOME/bin/pyspark
+which python
+```
+this query will return something like `/path/to/my/anaconda/bin/python`, copy the path up to the `bin` folder.
+
+Set environmental variables to launch Spark-enabled jupyter notebook.
+```bash
+export PYSPARK_DRIVER_PYTHON="/path/to/my/anaconda/bin/jupyter"
+export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+export PYSPARK_PYTHON="/path/to/my/anaconda/bin/python"
+```
+
+Next launch of pyspark shell will prompt you to the notebook:
+```bash
+pyspark
 ```
 change to the directory for first task 1_TransformationsActions in the web browser GUI, and click on the interactive python file.
