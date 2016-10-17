@@ -37,6 +37,7 @@ export PYSPARK_DRIVER_PYTHON="/path/to/my/anaconda/bin/jupyter"
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 export PYSPARK_PYTHON="/path/to/my/anaconda/bin/python"
 ```
+and add them to your `.profile` so that you do not need to retype every time you open a command line window. 
 
 Next launch of pyspark shell will prompt you to the notebook:
 ```bash
