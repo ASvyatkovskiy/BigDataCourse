@@ -96,7 +96,9 @@ jupyter notebook
 and proceed to complete each of the pre-exercises one by one.
 
 
-#### Check-out the course github repository:
+## Preparing for cluster portion of the mini-course
+
+Assuming you have an Adroit computing account, proceed to login to the cluster and checkout the mini-course repository.
 
 ```bash
 git clone https://github.com/ASvyatkovskiy/BigDataCourse 
