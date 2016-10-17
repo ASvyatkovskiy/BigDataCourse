@@ -165,6 +165,11 @@ Configure Apache Toree installation with Jupyter:
 ```bash
 jupyter toree install --spark_home=$SPARK_HOME
 ```
+If you get an error message like: `jupyter: 'toree' is not a Jupyter command`, then you would need to set:
+```bash
+export PATH=~/.local/bin:$PATH
+```
+and re-issue the command.
 
 Confirm installation:
 ```bash
