@@ -11,7 +11,7 @@ All the pre-exercises are supposed to be completed on your laptops. Some of the 
 Please make sure you have and Adroit computing account or request it following the instructions on the page:
 https://www.princeton.edu/researchcomputing/computational-hardware/adroit/
 
-### Test connection to the cluster
+#### Test connection to the cluster
 
 If you have the account, login to Adroit with X11 forwarding enabled:
 
@@ -21,7 +21,7 @@ ssh -XC your_username@adroit3.princeton.edu
 
 Install ssh client on your laptop if necessary (for instance, Putty).
 
-### How to run Spark on a Princeton University cluster: reading
+#### How to run Spark on a Princeton University cluster: reading
 
 To get a feeling of how this works, please look through the following FAQ page:
 https://www.princeton.edu/researchcomputing/faq/spark-via-slurm/
@@ -56,18 +56,6 @@ export PATH=$SPARK_HOME/sbin:$SPARK_HOME/bin:$PATH
 
 these lines should be added to the *.bashrc* file on your laptop, otherwise you would have to export these values each time you log in!
 
-## Pre-exercises (not required, but might be interesting)
-
-The pre-exercises are intended to build some domain knowledge in the fields covered during the course. 
-The interactive iPython notebooks cover web-mining (scraping), text processing, elements of natural language processing, machine learning (in particular, k-nearest neighbour classifier) and some modern data structures (Pandas DataFrame). 
-Each of these pre-exercises is supposed to be completed on the laptop and does not require cluster access, Apache Hadoop or Apache Spark installed.
-
-The pre-exercises cover some of the topics that will be discussed during the main course in detail.
-
-## Getting started with pre-exercises
-
-All exercises are intended to be perfromed on your laptops. 
-
 ### Download and install Anaconda
 
 Please go to the following website: https://www.continuum.io/downloads
@@ -88,29 +76,6 @@ and proceed with setting up the environment:
 conda create --name my_conda --file conda-requirements.txt
 source activate my_conda
 ```
-
-### Installing Jupyter Scala launcher
-
-First, ensure you got the right version of jupyter by typing: 
-
-```bash
-jupyter --version
-``` 
-it should print a value >= 4.0. Next, download and run the Jupyter Scala launcher with:
-
-```bash
-curl -L -o jupyter-scala https://git.io/vrHhi && chmod +x jupyter-scala && ./jupyter-scala && rm -f jupyter-scala
-```
-
-This downloads the bootstrap launcher of Jupyter Scala, then runs it. 
-If no previous version of it is already installed, this simply sets up 
-the kernel in ~/Library/Jupyter/kernels/scala211 (OSX) or ~/.local/share/jupyter/kernels/scala211 (Linux). 
-Note that on first launch, it will download its dependencies from Maven repositories. 
-These can be found under ~/.jupyter-scala/bootstrap.
-
-Once installed, the downloaded launcher can be removed, as it copies itself 
-in ~/Library/Jupyter/kernels/scala211 or ~/.local/share/jupyter/kernels/scala211.
-
 
 ### Install git
 
@@ -154,6 +119,65 @@ ls -l slurm-*.out
 ```
 and inspect it with your favourite text editor. The last line in the log file will give you the name of the Spark master node.
 
+## Pre-exercises (not required, but might be interesting)
 
-### In case help needed
+All of the pre-exercises should be completed on your laptops.
+
+The pre-exercises are intended to build some domain knowledge in the fields covered during the course. 
+The interactive iPython notebooks cover web-mining (scraping), text processing, elements of natural language processing, machine learning (in particular, k-nearest neighbour classifier) and some modern data structures (Pandas DataFrame). 
+Each of these pre-exercises is supposed to be completed on the laptop and does not require cluster access, Apache Hadoop or Apache Spark installed.
+
+The pre-exercises cover some of the topics that will be discussed during the main course in detail.
+
+## Additional installations for Day 2
+
+### Pre-requisites
+
+First, ensure you got the right version of jupyter and Java by typing: 
+
+```bash
+jupyter --version
+``` 
+it should print a value >= 4.0, and 
+
+```bash
+java -version
+```
+it should print a value like "1.8.0". If have version 1.7 on your laptops then go to http://download.oracle.com website and download it. Here is the direct link for Mac users: http://download.oracle.com/otn-pub/java/jdk/8u101-b13/jdk-8u101-macosx-x64.dmg
+
+Finally, check the SPARK_HOME environmental variable is set:
+
+```bash
+echo $SPARK_HOME
+```
+(should return a non empty string on the screen)
+
+### Install Apache Toree
+
+If all the prerequisites are in order, proceed to install Apache Toree - it provides a Scala Spark kernel for Jupyter.
+
+```bash
+#cd BigDataCourse
+pip install --user Toree/toree-0.2.0.dev1.tar.gz
+```
+
+Configure Apache Toree installation with Jupyter:
+```bash
+jupyter toree install --spark_home=$SPARK_HOME
+```
+
+Confirm installation:
+```bash
+jupyter kernelspec list
+```
+You should see something like:
+```bash
+Available kernels:
+  python2               /Users/alexey/anaconda/envs/BDcourseFall2016/lib/python2.7/site-packages/ipykernel/resources
+  apache_toree_scala    /usr/local/share/jupyter/kernels/apache_toree_scala
+```
+
+Next launch of `jupyter notebook` will give you an option to choose Apache Toree kernel from the upper right menu, which supports Scala and Spark.
+
+## In case help needed
 If you are experiencing any problems with the installation part or pre-exercises: please email me at alexeys@princeton.edu or come see me at the regular CSES office hours on Tuesday.
