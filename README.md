@@ -2,7 +2,7 @@
 
 Go to the root of work area where you checked out the course pre-exercises, and type:
 ```bash
-git checkout Spring2016
+git checkout Fall2016
 ```
 
 If you have not follow the pre-exercises, then check-out the git repository with the exercise 
