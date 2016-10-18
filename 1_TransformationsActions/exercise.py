@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #Uncomment the following import line for the exercise main_spark
-from pyspark import SparkContext
+#from pyspark import SparkContext
 
 import sys
 import os
