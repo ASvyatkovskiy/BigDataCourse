@@ -41,6 +41,7 @@ and add them to your `.profile` so that you do not need to retype every time you
 
 Next launch of pyspark shell will prompt you to the notebook:
 ```bash
-pyspark
+pyspark [options]
 ```
+where [options] is the list of flags you pass to pyspark.
 change to the directory for first task 1_TransformationsActions in the web browser GUI, and click on the interactive python file.
