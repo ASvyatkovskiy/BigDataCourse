@@ -1,4 +1,4 @@
-from pyspark import SparkContext
+from pyspark.sql import SparkSession
 
 import sys
 import time
@@ -6,10 +6,11 @@ import os
 from operator import add
 
 def main(args,npartitions):
-    sc = SparkContext(appName="LoadJson")
+    spark = SparkSession.builder.appName("CachingExercise").getOrCreate()
 
     start = time.time()
-    lines = sc.textFile("/scratch/network/alexeys/BigDataCourse/large/", npartitions)
+    #should be path to instructors scratch folder
+    lines = spark.sparkContext.textFile("/scratch/network/alexeys/BigDataCourse/large/", npartitions)
     print "Number of elements in input dataframe: ", lines.count()
 
     counts = lines.flatMap(lambda x: x.split(' ')) \
@@ -28,7 +29,6 @@ def main(args,npartitions):
 
     end = time.time()
     print "Elapsed time: ", end-start
-    sc.stop()
 
 if __name__ == "__main__":
     #Exercise 1: try running with 10 partitions, time it, then change to default 2 partitions
