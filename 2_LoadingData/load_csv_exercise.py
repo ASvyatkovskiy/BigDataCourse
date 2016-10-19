@@ -1,5 +1,4 @@
-from pyspark import SparkContext
-from pyspark.sql import SQLContext
+from pyspark.sql import SparkSession
 
 import sys
 import time
@@ -11,13 +10,12 @@ import os
 def main(args):
     start  = time.time()
  
-    sc = SparkContext(appName="LoadCsv")
+    spark = SparkSession.builder.appName("LoadCsv").getOrCreate()
     delimiter = "|"
 
     #Load 3 csv files into spark dataframe   
     #this requires using the databricks/spark-csv
-    sqlContext = SQLContext(sc)
-    person_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/person_nodes.csv')
+    person_df = spark.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/person_nodes.csv')
     movie_df = 
     relationships_df = 
 
@@ -32,7 +30,7 @@ def main(args):
     print answer.select(...).show()
 
     #Save the answer in JSON format 
-    answer.repartition(1).select(...).write.save(os.environ.get('SCRATCH_PATH')+"/json/", format="json")
+    answer.coalesce(1).select(...).write.save(os.environ.get('SCRATCH_PATH')+"/json/", format="json")
 
     end = time.time()
     print "Elapsed time: ", (end-start)

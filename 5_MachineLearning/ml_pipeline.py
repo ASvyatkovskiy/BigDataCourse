@@ -1,5 +1,4 @@
-from pyspark import SparkContext
-from pyspark.sql import SQLContext
+from pyspark.sql import SparkSession
 from pyspark.ml import Pipeline
 from pyspark.ml.classification import LogisticRegression
 from pyspark.ml.feature import HashingTF, Tokenizer
@@ -8,11 +7,10 @@ from pyspark.sql import Row
 
 def main():
     # Prepare training documents from a list of (id, text, label) tuples.
-    sc = SparkContext(appName="MyApp")
-    sqlContext = SQLContext(sc)
+    spark = SparkSession.builder.appName("MLpipeline").getOrCreate()
 
     LabeledDocument = Row("id", "text", "label")
-    training = sqlContext.createDataFrame([
+    training = spark.createDataFrame([
      (0L, "a b c d e spark", 1.0),
      (1L, "b d", 0.0),
      (2L, "spark f g h", 1.0),
@@ -28,7 +26,7 @@ def main():
     model = pipeline.fit(training)
 
     # Prepare test documents, which are unlabeled (id, text) tuples.
-    test = sqlContext.createDataFrame([
+    test = spark.createDataFrame([
      (4L, "spark i j k"),
      (5L, "l m n"),
      (6L, "mapreduce spark"),

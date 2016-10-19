@@ -1,5 +1,4 @@
-from pyspark import SparkContext
-from pyspark.sql import SQLContext
+from pyspark.sql import SparkSession
 
 import sys
 import time
@@ -11,14 +10,13 @@ import os
 def main(args):
     start  = time.time()
  
-    sc = SparkContext(appName="LoadCsv")
+    spark = SparkSession.builder.appName("LoadCsv").getOrCreate()
     delimiter = "|"
 
     #Load 3 csv files into spark dataframe   
-    sqlContext = SQLContext(sc)
-    person_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/person_nodes.csv')
-    movie_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/movie_nodes.csv')
-    relationships_df = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/acted_in_rels.csv')
+    person_df = spark.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/person_nodes.csv')
+    movie_df = spark.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/movie_nodes.csv')
+    relationships_df = spark.read.format('com.databricks.spark.csv').options(header='true', inferschema='true',delimiter=delimiter).load('/scratch/network/alexeys/BigDataCourse/csv/acted_in_rels.csv')
 
     #Prepare a linked dataset of people, movies and the roles for people who played in those movies
     df = person_df.join(relationships_df, person_df.id == relationships_df.person_id) 
@@ -31,7 +29,7 @@ def main(args):
     print answer.select('name','title','roles').show()
 
     #Save the answer in JSON format 
-    answer.repartition(1).select('name','title','roles').write.save(os.environ.get('SCRATCH_PATH')+"/json/", format="json")
+    answer.coalesce(1).select('name','title','roles').write.save(os.environ.get('SCRATCH_PATH')+"/json/", format="json")
 
     end = time.time()
     print "Elapsed time: ", (end-start)
