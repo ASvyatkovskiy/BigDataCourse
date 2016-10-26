@@ -10,4 +10,4 @@ module load spark/hadoop2.6/2.0.0
 spark-start
 echo $MASTER
 
-spark-submit --class "WordCount" --total-executor-cores 18 target/scala-2.10/ScalExample-assembly-1.0.jar
+spark-submit --class "WordCount" --total-executor-cores 18 target/scala-2.11/ScalExample-assembly-1.0.jar
