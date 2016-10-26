@@ -9,10 +9,12 @@ object UDAFExample {
 
   class GeometricMean extends UserDefinedAggregateFunction {
     // This is the input fields for your aggregate function.
+    // Our dataframe has 2 columns, we groupby 1 column (integer type) and aggregate by another one (double type)
     override def inputSchema: org.apache.spark.sql.types.StructType = 
       StructType(StructField("value", DoubleType) :: Nil)
 
-    // This is the internal fields you keep for computing your aggregate.
+    //Type of buffer within each partition
+    //To calculate geometric mean we are going to need to keep track of product of all elements and the count
     override def bufferSchema: StructType = StructType(
       StructField("count", LongType) ::
       StructField("product", DoubleType) :: Nil
@@ -23,19 +25,19 @@ object UDAFExample {
   
     override def deterministic: Boolean = true
   
-    // This is the initial value for your buffer schema.
+    // This is the initial value for your buffer schema: long 0 for accumulation, and 1.0 double for multiplication
     override def initialize(buffer: MutableAggregationBuffer): Unit = {
       buffer(0) = 0L
       buffer(1) = 1.0
     }
    
-    // This is how to update your buffer schema given an input.
+    //How we update buffer within each partition: increment and multiply
     override def update(buffer: MutableAggregationBuffer, input: Row): Unit = {
       buffer(0) = buffer.getAs[Long](0) + 1
       buffer(1) = buffer.getAs[Double](1) * input.getAs[Double](0)
     }
  
-    // This is how to merge two objects with the bufferSchema type.
+    // This is how to merge buffers from different partitions
     override def merge(buffer1: MutableAggregationBuffer, buffer2: Row): Unit = {
       buffer1(0) = buffer1.getAs[Long](0) + buffer2.getAs[Long](0)
       buffer1(1) = buffer1.getAs[Double](1) * buffer2.getAs[Double](1)
