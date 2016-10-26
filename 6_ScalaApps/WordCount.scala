@@ -1,13 +1,16 @@
-import org.apache.spark.{SparkConf, SparkContext, SparkFiles}
-import org.apache.spark.SparkContext._
+import org.apache.spark.sql.SparkSession
 
 object WordCount {
   def main(args: Array[String]) {
 
-    val conf = new SparkConf().setAppName("WordCountApp")
-    val spark = new SparkContext(conf)
+    val spark = SparkSession.builder()
+      .appName("WordCount")
+      .config("spark.sql.codegen.wholeStage", "true")
+      .getOrCreate()
 
-    val textFile = spark.textFile("file:///scratch/network/alexeys/BigDataCourse/unstructured/",10)
+    import spark.implicits._
+
+    val textFile = spark.sparkContext.textFile("file:///scratch/network/alexeys/BigDataCourse/unstructured/",10)
     val counts = textFile.flatMap(line => line.split(" "))
                  .map(word => (word, 1))
                  .reduceByKey(_ + _)
