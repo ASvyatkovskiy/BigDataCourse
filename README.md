@@ -1,4 +1,4 @@
-# Introduction to Big Data with Apache Spark
+# Advanced Data Analysis Techniques with Apache Spark
 
 ## Getting ready for the workshop (required before the day of workshop)
 
