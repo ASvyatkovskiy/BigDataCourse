@@ -1,4 +1,4 @@
-#Introduction to Big Data with Apache Spark
+# Introduction to Big Data with Apache Spark
 
 ## Getting ready for the workshop (required before the day of workshop)
 
@@ -29,9 +29,9 @@ https://www.princeton.edu/researchcomputing/faq/spark-via-slurm/
 
 ### Install Apache Spark on your laptop
 
-Install Apache Spark 2.0.0 on your laptop. Here are some instructions on how to do that:
+Install Apache Spark 2.1.0 on your laptop. Here are some instructions on how to do that:
 1) Go to the Spark download page: http://spark.apache.org/downloads.html
-select a prebuilt distribution: http://d3kbcqa49mib13.cloudfront.net/spark-2.0.0-bin-hadoop2.6.tgz
+select a prebuilt distribution: http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.6.tgz
 
 Download and unpack it, then proceed to the step 2). Alternatively, one can install and build a custom Spark distribution from source:
 
@@ -131,7 +131,7 @@ Each of these pre-exercises is supposed to be completed on the laptop and does n
 
 The pre-exercises cover some of the topics that will be discussed during the main course in detail.
 
-## Additional installations for Day 2
+## Additional installations
 
 ### Pre-requisites
 
