@@ -31,13 +31,12 @@ https://www.princeton.edu/researchcomputing/faq/spark-via-slurm/
 
 Install Apache Spark 2.1.0 on your laptop. Here are some instructions on how to do that:
 1) Go to the Spark download page: http://spark.apache.org/downloads.html
-select a prebuilt distribution: http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.6.tgz
+select installation from source: http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0.tgz
 
-Download and unpack it, then proceed to the step 2). Alternatively, one can install and build a custom Spark distribution from source:
+Download, unpack, and build it with Maven:
 
 ```bash
-git clone git://github.com/apache/spark.git
-cd spark/
+#cd spark-2.1.0/
 build/mvn -DskipTests clean package
 ```
 
@@ -50,7 +49,7 @@ export PATH=<path to your maven>/apache-maven-3.3.9/bin:$PATH
 2) Update following environmental variables to point to the new Spark location:
 
 ```bash
-export SPARK_HOME=/home/<your_username>/your_local_spark/spark
+export SPARK_HOME=/home/<your_username>/your_local_spark/spark-2.1.0
 export PATH=$SPARK_HOME/sbin:$SPARK_HOME/bin:$PATH
 ```
 
