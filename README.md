@@ -1,8 +1,8 @@
-#Introduction to Big Data with Apache Spark
+# Apache Spark mini-course
 
 Go to the root of work area where you checked out the course pre-exercises, and type:
 ```bash
-git checkout Fall2016
+git checkout Spring2017
 ```
 
 If you have not follow the pre-exercises, then check-out the git repository with the exercise 
@@ -10,7 +10,7 @@ If you have not follow the pre-exercises, then check-out the git repository with
 ```bash
 git clone https://github.com/ASvyatkovskiy/BigDataCourse
 ```
-and then switch to the Spring2016 branch.
+and then switch to the Spring2017 branch.
 
 Next, activate your Anaconda environment where the iPython noteboom is installed:
 
