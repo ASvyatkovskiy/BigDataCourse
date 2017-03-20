@@ -11,7 +11,7 @@ def main_sqlcontext(args):
     input.printSchema()
     input.registerTempTable("movies")
     answer = spark.sql("SELECT * FROM movies WHERE title LIKE '%Atlas%'")
-    answer.coalesce(1).write.save(os.environ.get('SCRATCH_PATH')+"/output_json1/", format="json")
+    answer.coalesce(1).write.json(os.environ.get('SCRATCH_PATH')+"/output_json1/") 
 
 def main_unstructured(args):
     spark = SparkSession.builder.appName("LoadJson").getOrCreate()
