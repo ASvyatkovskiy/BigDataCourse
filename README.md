@@ -26,6 +26,24 @@ Install ssh client on your laptop if necessary (for instance, Putty).
 To get a feeling of how this works, please look through the following FAQ page:
 https://www.princeton.edu/researchcomputing/faq/spark-via-slurm/
 
+# Install with Docker
+
+[Docker](https://www.docker.com/) is a containerisation engine that makes it much easier to run softwares. It essentially works as a lightweight VM manager, allowing you to spin instances up or down very easily. First step is to [install Docker](https://www.docker.com/community-edition).
+
+Once you have Docker, run the following to download all of the images required to spin up a Spark Notebook:
+```bash
+docker pull jupyter/all-spark-notebook
+```
+This will take a little while, but once it's complete you are basically ready to go. Clone this repo, switch to the Spring2017 branch, and run a Docker container with the following commands:
+```bash
+git clone https://github.com/ASvyatkovskiy/BigDataCourse && cd BigDataCourse
+git checkout Spring2017
+docker run -it --rm -p 8888:8888 -v $(pwd)/:/home/jovyan/work jupyter/all-spark-notebook
+```
+Enter the URL that pops up in your terminal into a browser, and you should be good to go.
+
+# Install Locally
+
 
 ### Install Apache Spark on your laptop
 
