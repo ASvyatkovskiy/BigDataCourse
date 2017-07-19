@@ -44,7 +44,6 @@ Enter the URL that pops up in your terminal into a browser, and you should be go
 
 # Install Locally
 
-
 ### Install Apache Spark on your laptop
 
 Install Apache Spark 2.1.0 on your laptop. Here are some instructions on how to do that:
@@ -52,7 +51,6 @@ Install Apache Spark 2.1.0 on your laptop. Here are some instructions on how to 
 select installation from source: http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0.tgz
 
 Download, unpack, and build it with Maven:
-
 ```bash
 #cd spark-2.1.0/
 build/mvn -DskipTests clean package
@@ -207,21 +205,9 @@ Next launch of `jupyter notebook` will give you an option to choose Apache Toree
 If you are experiencing any problems with the installation part or pre-exercises: please email me at alexeys@princeton.edu or come see me at the regular CSES office hours on Tuesday.
 
 
-# Apache Spark mini-course
+# Proceed with first exercise
 
-Go to the root of work area where you checked out the course pre-exercises, and type:
-```bash
-git checkout Spring2017
-```
-
-If you have not follow the pre-exercises, then check-out the git repository with the exercise 
-
-```bash
-git clone https://github.com/ASvyatkovskiy/BigDataCourse
-```
-and then switch to the Spring2017 branch.
-
-Next, activate your Anaconda environment where the iPython noteboom is installed:
+Make sure to activate your Anaconda environment:
 
 ```bash
 #conda create --name my_conda --file conda-requirements.txt
