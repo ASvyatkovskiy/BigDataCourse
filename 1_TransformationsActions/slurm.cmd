@@ -7,7 +7,7 @@
 #SBATCH --reservation bigdata_introduction
 
 module load python
-module load spark/hadoop2.6/2.0.0
+module load spark/hadoop2.7/2.2.0
 spark-start
 echo $MASTER
 

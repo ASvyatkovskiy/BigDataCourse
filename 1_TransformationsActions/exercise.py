@@ -11,11 +11,11 @@ def basic(numbers):
     for number in numbers:
         if number < 4:
             squares.append(number*number)
-    print "Result of the local calculation: ", squares
+    print ("Result of the local calculation: ", squares)
 
 def basic_pythonic(numbers):
     squares = map(lambda x: x*x, filter(lambda x: x < 4, numbers))
-    print "Result of the local pythonic calculation: ", squares
+    print ("Result of the local pythonic calculation: ", *squares)
 
 def main_local(args):
     numbers = [1,2,3,4,5]
