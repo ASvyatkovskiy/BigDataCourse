@@ -1,17 +1,17 @@
 # Advanced Data Analysis Techniques with Apache Spark
 
-# Getting ready for the workshop (required before the day of workshop)
+## Getting ready for the workshop (required before the day of workshop)
 
 You will need to request access to the Adroit cluster, install Apache Spark and some packages on your laptop, and optionally complete a set of pre-exercises.
 
 All the pre-exercises are supposed to be completed on your laptops. Some of the workshop exercises will be done on your laptops, and some will be done on the cluster.
 
-## Request an Adroit computing account
+### Request an Adroit computing account
 
 Please make sure you have and Adroit computing account or request it following the instructions on the page:
 https://www.princeton.edu/researchcomputing/computational-hardware/adroit/
 
-### Test connection to the cluster
+#### Test connection to the cluster
 
 If you have the account, login to Adroit with X11 forwarding enabled:
 
@@ -21,7 +21,7 @@ ssh -XC your_username@adroit3.princeton.edu
 
 Install ssh client on your laptop if necessary (for instance, Putty on Windows. On Mac or Linux operating systems one can simply use terminal).
 
-# Install with Docker
+## Install with Docker
 
 Note: this is for the portion of the exercise on the laptops only. Spark is already instealled on Adroit
 
@@ -38,13 +38,13 @@ docker run -it --rm -p 8888:8888 -v $(pwd)/:/home/jovyan/work jupyter/all-spark-
 ```
 Enter the URL that pops up in your terminal into a browser, and you should be good to go.
 
-# Install manually
+## Install manually
 
 Note: this is for the portion of the exercise on the laptops only. Spark is already instealled on Adroit
 
 If Docker is not an option for you, you can always install manually from source or binaries.
 
-## Install Apache Spark on your laptop
+### Install Apache Spark on your laptop
 
 Install Apache Spark 2.2.0 on your laptop. Here are some instructions on how to do that:
 1) Go to the Spark download page: http://spark.apache.org/downloads.html
@@ -71,7 +71,7 @@ export PATH=$SPARK_HOME/sbin:$SPARK_HOME/bin:$PATH
 
 these lines should be added to the *.bashrc* file on your laptop, otherwise you would have to export these values each time you log in!
 
-## Download and install Anaconda, install necessary Python packages
+### Download and install Anaconda, install necessary Python packages
 
 Please go to the following website: https://www.continuum.io/downloads
 download and install *the latest* Anaconda version for Python 3 for your operating system. 
@@ -93,7 +93,7 @@ conda create --name my_conda --file 0_Preexercise/conda-requirements.txt
 source activate my_conda
 ```
 
-## Set up Spark-enabled Jupyter notebook 
+### Set up Spark-enabled Jupyter notebook 
 
 Locate your anaconda python:
 ```bash
@@ -116,9 +116,9 @@ pyspark [options]
 ```
 where [options] is the list of flags you pass to pyspark. Proceed to pre-exercise.
 
-## Additional installations (optional)
+### Additional installations (optional)
 
-### Pre-requisites
+#### Pre-requisites
 
 First, ensure you got the right version of jupyter and Java by typing: 
 
@@ -139,7 +139,7 @@ echo $SPARK_HOME
 ```
 (should return a non empty string on the screen)
 
-### Install Apache Toree
+#### Install Apache Toree
 
 If all the prerequisites are in order, proceed to install Apache Toree - it provides a Scala Spark kernel for Jupyter.
 
