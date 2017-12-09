@@ -26,13 +26,13 @@ def main(args):
     answer = combined_df.where(...
 
     #Return only actor name, movie title and roles
-    print answer.select(...).show()
+    print (answer.select(...).show())
 
     #Save the answer in JSON format 
     answer.coalesce(1).select(...).write.json(os.environ.get('SCRATCH_PATH')+"/json/")
 
     end = time.time()
-    print "Elapsed time: ", (end-start)
+    print ("Elapsed time: ", (end-start))
 
 
 if __name__ == "__main__":
