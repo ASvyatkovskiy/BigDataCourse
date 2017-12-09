@@ -11,7 +11,7 @@ def main(args,npartitions):
     start = time.time()
     #should be path to instructors scratch folder
     lines = spark.sparkContext.textFile("/scratch/network/alexeys/BigDataCourse/large/", npartitions)
-    print "Number of elements in input dataframe: ", lines.count()
+    print ("Number of elements in input dataframe: ", lines.count())
 
     counts = lines.flatMap(lambda x: x.split(' ')) \
                   .map(lambda x: (x, 1)) \
@@ -28,7 +28,7 @@ def main(args,npartitions):
     #counts2.saveAsTextFile(os.environ.get('SCRATCH_PATH')+"/output_large2/")
 
     end = time.time()
-    print "Elapsed time: ", end-start
+    print ("Elapsed time: ", end-start)
 
 if __name__ == "__main__":
     #Exercise 1: try running with 10 partitions, time it, then change to default 2 partitions
