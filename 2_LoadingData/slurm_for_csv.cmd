@@ -4,11 +4,11 @@
 #SBATCH -t 00:05:00
 #SBATCH --ntasks-per-node 2
 #SBATCH --cpus-per-task 3
-#SBATCH --reservation bigdata_introduction
+#SBATCH --reservation SparkClass
 
 module load python
-module load spark/hadoop2.6/2.0.0
+module load spark/hadoop2.7/2.2.0
 spark-start
 echo $MASTER
 
-spark-submit --total-executor-cores 6 --jars lib/spark-csv_2.10-1.3.0.jar,lib/commons-csv-1.2.jar load_csv_exercise.py
+spark-submit --total-executor-cores 6 load_csv_exercise.py
