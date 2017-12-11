@@ -4,10 +4,10 @@
 #SBATCH -t 00:20:00
 #SBATCH --ntasks-per-node 6
 #SBATCH --cpus-per-task 3
-#SBATCH --reservation root_21
+#SBATCH --reservation SparkClass
 
 module load python
-module load spark/hadoop2.6/2.0.0
+module load spark/hadoop2.7/2.2.0
 spark-start
 echo $MASTER
 
