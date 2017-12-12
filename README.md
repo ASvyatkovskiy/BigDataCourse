@@ -23,7 +23,7 @@ Install ssh client on your laptop if necessary (for instance, Putty on Windows. 
 
 ## Install with Docker
 
-Note: this is for the portion of the exercise on the laptops only. Spark is already instealled on Adroit
+Note: this is for the laptops portion of the exercise only. Spark is already installed on Adroit cluster
 
 [Docker](https://www.docker.com/) is a containerisation engine that makes it much easier to run softwares. It essentially works as a lightweight VM manager, allowing you to spin instances up or down very easily. First step is to [install Docker](https://www.docker.com/community-edition).
 
@@ -40,7 +40,7 @@ Enter the URL that pops up in your terminal into a browser, and you should be go
 
 ## Install manually
 
-Note: this is for the portion of the exercise on the laptops only. Spark is already instealled on Adroit
+Note: this is for the laptops portion of the exercise only. Spark is already installed on Adroit cluster
 
 If Docker is not an option for you, you can always install manually from source or binaries.
 
